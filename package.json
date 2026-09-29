@@ -1,7 +1,7 @@
 {
   "name": "@gbesse/jev-cnil-control-map",
-  "version": "0.1.0",
-  "description": "Map public CNIL sanction reasoning to reviewable privacy-control gaps without producing legal conclusions.",
+  "version": "0.1.1",
+  "description": "Relie les motifs publics de sanctions CNIL aux écarts possibles des contrôles de protection des données.",
   "type": "module",
   "license": "MIT",
   "engines": {

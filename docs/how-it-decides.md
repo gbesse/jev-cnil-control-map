@@ -1,5 +1,5 @@
-# How it decides
+# Comment la décision est prise
 
-Decision references, dates, processing identifiers and control ownership stay in code. Jev compares supplied reasoning with one control and its evidence. Outputs are audit prompts, never legal advice.
+Les références, dates, traitements et responsables restent dans le code. Jev compare seulement le motif et le contrôle fournis. La sortie ne constitue jamais un conseil juridique.
 
-The exact questions and criteria are versioned beside the call in [src/index.mjs](../src/index.mjs). Synthetic demo probabilities are illustrative. Calibrate review thresholds on representative labels before operational use.
+La question et les critères exacts sont versionnés dans [`src/index.mjs`](../src/index.mjs). Les probabilités de la démonstration sont synthétiques. Calibrez les seuils de revue sur des cas français annotés et représentatifs avant tout usage opérationnel.

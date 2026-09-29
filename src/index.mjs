@@ -1,4 +1,4 @@
-// Purpose: Implement the package-specific, reviewable decision boundary.
+// Objectif : implémenter la frontière de décision métier propre au dépôt.
 export const MAPPINGS=["addressed","partially_addressed","analogous_gap","not_applicable","unclear"];
 export function cnilDecision(input){if(!input?.reference||!input?.date||!input?.reasoning||!input?.sourceUrl)throw new TypeError("Decision needs reference, date, reasoning and sourceUrl");const d=new Date(input.date);if(Number.isNaN(d.valueOf()))throw new TypeError("date must be ISO");return{reference:String(input.reference),date:d.toISOString(),reasoning:String(input.reasoning),articles:[...(input.articles||[])].map(String),sourceUrl:String(input.sourceUrl)};}
 export function privacyControl(input){if(!input?.id||!input?.processingId||!input?.description)throw new TypeError("Control needs id, processingId and description");return{id:String(input.id),processingId:String(input.processingId),description:String(input.description),evidence:[...(input.evidence||[])].map(String),owner:String(input.owner||"")};}
