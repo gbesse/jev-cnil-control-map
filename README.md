@@ -2,7 +2,7 @@
 
 **Relie les motifs publics de sanctions CNIL aux écarts possibles des contrôles de protection des données.**
 
-[![Tests](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.1 · Documentation française
+[![Tests](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
 
 Le moteur compare le raisonnement sourcé d’une décision CNIL à un contrôle interne et à ses preuves pour préparer une file de revue d’audit.
 
@@ -16,6 +16,64 @@ npm run demo
 ```
 
 La démonstration utilise uniquement des données et probabilités synthétiques. Elle n’effectue aucun appel réseau et ne constitue pas une mesure de qualité de Jev.
+
+## Exemple exécutable
+
+Cet exemple compare un motif de sanction CNIL à une preuve de contrôle. Il utilise un fournisseur Jev simulé : aucune clé API ni connexion réseau n’est nécessaire. L’assertion intégrée fait échouer la commande si le comportement attendu change.
+
+Le code complet de [`examples/demo.mjs`](examples/demo.mjs) est directement copiable :
+
+```js
+// Objectif : démontrer la frontière de décision sans appel réseau.
+import assert from "node:assert/strict";
+import { mapControl } from "../src/index.mjs";
+import { createFakeProvider } from "../src/jev.mjs";
+const p = createFakeProvider(() => ({
+  model: "jev-1.13.0",
+  answers: {
+    mapping: {
+      type: "choice",
+      choice: "partially_addressed",
+      probabilities: {
+        addressed: 0.15,
+        partially_addressed: 0.68,
+        analogous_gap: 0.1,
+        not_applicable: 0.02,
+        unclear: 0.05,
+      },
+      confidence: 0.68,
+    },
+  },
+  usage: {},
+}));
+const resultat = await mapControl(
+  {
+    reference: "SAN-SYNTHETIC",
+    date: "2026-01-01",
+    reasoning: "Information insuffisante sur la durée de conservation.",
+    articles: ["RGPD-13"],
+    sourceUrl: "https://legifrance.gouv.fr",
+  },
+  {
+    id: "ctl-1",
+    processingId: "crm",
+    description: "Notice d'information CRM",
+    evidence: ["Notice publiée"],
+    owner: "DPO",
+  },
+  p,
+);
+assert.equal(resultat.mapping, "partially_addressed");
+console.log(JSON.stringify(resultat, null, 2));
+```
+
+Lancez-le avec :
+
+```sh
+npm run demo
+```
+
+Résultat à repérer : `mapping: partially_addressed`.
 
 ## Utilisation de la bibliothèque
 
