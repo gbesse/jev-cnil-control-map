@@ -2,7 +2,7 @@
 
 **Relie les motifs publics de sanctions CNIL aux écarts possibles des contrôles de protection des données.**
 
-[![Tests](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
+[![Tests](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.3 · Documentation française
 
 Le moteur compare le raisonnement sourcé d’une décision CNIL à un contrôle interne et à ses preuves pour préparer une file de revue d’audit.
 
@@ -70,10 +70,20 @@ console.log(JSON.stringify(resultat, null, 2));
 Lancez-le avec :
 
 ```sh
-npm run demo
+npm run demo:principal
 ```
 
 Résultat à repérer : `mapping: partially_addressed`.
+
+### Cas limite à tester
+
+Même avec un résultat incertain, la sortie reste une revue et jamais un avis juridique. Le code se trouve dans [`examples/cas-limite.mjs`](examples/cas-limite.mjs).
+
+```sh
+npm run demo:limite
+```
+
+Résultat à repérer : `review: true · legalAdvice: false`. La commande `npm run demo` exécute les deux exemples.
 
 ## Utilisation de la bibliothèque
 
