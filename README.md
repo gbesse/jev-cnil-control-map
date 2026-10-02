@@ -2,7 +2,7 @@
 
 **Relie les motifs publics de sanctions CNIL aux écarts possibles des contrôles de protection des données.**
 
-[![Tests](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.3 · Documentation française
+[![Tests](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-cnil-control-map/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.4 · Documentation française
 
 Le moteur compare le raisonnement sourcé d’une décision CNIL à un contrôle interne et à ses preuves pour préparer une file de revue d’audit.
 
@@ -113,6 +113,12 @@ TYPESAFE_API_KEY=... node scripts/live-smoke.mjs
 ```
 
 N’envoyez jamais de secret, de donnée personnelle ni de dossier sensible non expurgé. Évaluez le comportement sur un jeu représentatif de cas français avant tout usage opérationnel.
+
+## Parcours comparatif
+
+`npm run demo:parcours` produit un rapport JSON partageable pour **jev-cnil-control-map** : le scénario principal et la frontière déterministe. Chaque scénario garde sa sortie propre et échoue si son assertion ne passe plus. Les données et probabilités sont synthétiques ; aucun appel Jev n’est effectué.
+
+Cette vue permet de comparer rapidement les chemins de décision et de choisir quel exemple adapter à vos propres données sourcées.
 
 ## Validation
 
